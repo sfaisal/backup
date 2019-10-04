@@ -1,0 +1,15 @@
+#essential tasks. should run on all nodes
+- name: creating devops group
+  group: name=devops state=present
+- name: create devops user
+  user: name=devops comment="Devops User" uid=2001 group=devops
+- name: add epel-release directory
+  yum_repository:
+    name: epel-release
+    baseurl: http://download.fedoraproject.org/pub/epel/7/$basearch
+    mirrorlist: http://mirrors.fedoraproject.org/mirrorlist?repo=epel-7&arch=x86_64
+    description: EPEL Release repo
+- name: install epel-release
+  yum: name=epel-release state=present
+#- name: install htop package
+#   yum: name=htop state=present disablerepo=epel

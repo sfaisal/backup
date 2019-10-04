@@ -1,0 +1,6 @@
+#www.yml : playbook for web servers
+ - hosts: www
+   remote_user: vagrant
+   become: True
+   roles:
+     - nginx

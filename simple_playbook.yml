@@ -1,0 +1,37 @@
+---
+- hosts: all
+  remote_user: vagrant
+  become: true
+  tasks:
+  - group:
+      name: devops
+      state: present
+  - name: create devops user with admin priv
+    user:
+      name: devops
+      comment: "Devops User"
+      uid: 2001
+      group: devops
+  - name: install htop package
+    yum: 
+      name: htop
+      state: present
+
+- hosts: www
+  user: vagrant
+  become: true
+  tasks:
+  - name: add official nginx directory
+    yum_repository: 
+      name: nginx
+      baseurl: http://nginx.org/packages/centos/7/$basearch/
+      gpgkey: http://nginx.org/packages/keys/nginx_signing.key
+      gpgcheck: yes		
+  - name: install nginx webserver and ensure its the latest
+    yum:
+      name: nginx
+      state: latest
+  - name: start nginx service
+    service:
+      name: nginx
+      state: started

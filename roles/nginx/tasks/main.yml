@@ -1,0 +1,4 @@
+#This is main tasks file for nginx role
+- import_tasks: install.yml
+- import_tasks: configure.yml
+- import_tasks: service.yml

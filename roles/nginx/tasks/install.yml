@@ -1,0 +1,14 @@
+- name: add official nginx directory
+  yum_repository:
+    name: nginx
+    baseurl: http://nginx.org/packages/centos/7/$basearch/
+    gpgkey: http://nginx.org/keys/nginx_signing.key
+    gpgcheck: 0
+    enabled: 1
+    description: add nginx repo
+#- name: install nginx webserver and ensure its the latest
+ # yum:
+  #  name: nginx
+   # state: present
+    #update_cache: true
+ 
